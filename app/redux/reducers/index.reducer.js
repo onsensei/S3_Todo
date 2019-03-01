@@ -1,5 +1,5 @@
-import temp from './temp.reducer';
+import todo from './todo.reducer';
 
 export default {
-  temp
+  todo
 };
