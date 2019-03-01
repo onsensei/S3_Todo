@@ -6,14 +6,14 @@ import {createAction} from 'redux-actions';
 // action type
 // -----------
 
-export const POPULATE_NOTES_ACTION = 'POPULATE_NOTES_ACTION';
-export const INSERT_NOTE_ACTION = 'INSERT_NOTE_ACTION';
-export const UPDATE_NOTE_ACTION = 'UPDATE_NOTE_ACTION';
+export const POPULATE_TODO_LIST = 'POPULATE_TODO_LIST';
+export const INSERT_TODO = 'INSERT_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
 
 // --------------
 // action creator
 // --------------
 
-export const populateNotesAction = createAction(POPULATE_NOTES_ACTION);
-export const insertNoteAction = createAction(INSERT_NOTE_ACTION);
-export const updateNoteAction = createAction(UPDATE_NOTE_ACTION);
+export const populateTodoListAction = createAction(POPULATE_TODO_LIST);
+export const insertTodoAction = createAction(INSERT_TODO);
+export const updateTodoAction = createAction(UPDATE_TODO);
