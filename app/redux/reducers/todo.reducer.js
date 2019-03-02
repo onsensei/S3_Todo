@@ -4,21 +4,21 @@ import * as actions from '../actions/index.action';
 const initialState = {
   todoList: [
     {
-      taskId: 1,
+      taskId: '653a8970-3cd0-11e9-a347-811821c3f423',
       title: 'title 01',
       description: 'description 01 description 01 description 01 description 01 description 01 description 01 description 01 description 01 description 01 description 01',
       date: '2019-01-15',
       isDone: true
     },
     {
-      taskId: 2,
+      taskId: 'a4f19270-3cd0-11e9-a347-811821c3f423',
       title: 'title 02',
       description: 'description 02 description 02 description 02 description 02 description 02 description 02 description 02 description 02 description 02 description 02',
       date: '2019-02-15',
       isDone: false
     },
     {
-      taskId: 3,
+      taskId: 'bf17e870-3cd0-11e9-a347-811821c3f423',
       title: 'title 03',
       description: 'description 03 description 03 description 03 description 03 description 03 description 03 description 03 description 03 description 03 description 03',
       date: '2019-03-15',

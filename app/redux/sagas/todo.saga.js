@@ -1,4 +1,5 @@
 import replaceIndex from 'replace-array-index';
+import uuidv1 from 'uuid/v1';
 import {get} from 'lodash';
 import {getSelector} from '../../utils/Common.util';
 import {put, select, takeLatest} from 'redux-saga/effects';
@@ -35,7 +36,19 @@ export function* updateTodoHandler (action) {
 export function* saveTodoHandler (action) {
   const todoMode = get(action.payload, 'navigation.state.params.todoMode', null);
   if (todoMode === 'add') {
-    //
+    const todoStoreState = yield select(todoSelector);
+    const title = get(todoStoreState, 'editingTodo.title', null);
+    const description = get(todoStoreState, 'editingTodo.description', null);
+    const date = get(todoStoreState, 'editingTodo.date', null);
+
+    const newTodo = {
+      taskId: uuidv1(),
+      title,
+      description,
+      date,
+      isDone: false
+    };
+    yield put(actions.insertTodoAction(newTodo));
   } else if (todoMode === 'edit') {
     const todoStoreState = yield select(todoSelector);
     const editingTaskId = get(todoStoreState, 'editingTodo.taskId', null);
