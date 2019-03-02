@@ -7,12 +7,17 @@ import {get} from 'lodash';
 import {View} from 'react-native';
 
 class HomePage extends Component {
+  _onPressTodoItem = (item) => {
+    //
+  }
+
   render () {
     const {todoListData} = this.props;
     return (
       <View style={styles.container}>
         <Home style={styles.homeContainer}
           todoListData={todoListData}
+          onPressTodoItem={this._onPressTodoItem}
         />
       </View>
     );

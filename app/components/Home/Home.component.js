@@ -3,18 +3,20 @@ import React, {Component} from 'react';
 import styles from './Home.style';
 import Touchable from 'react-native-platform-touchable';
 import {FlatList, Text, View} from 'react-native';
+import {noop} from 'lodash';
 
 export default class Home extends Component {
   // eslint-disable-next-line
   _keyExtractor = (item, index) => `${item.taskId}`;
 
-  _onPressItem = () => {
-    //
+  _onPressItem = (item) => () => {
+    const {onPressTodoItem} = this.props;
+    onPressTodoItem(item);
   };
 
   _renderItem = ({item}) => (
     <Touchable style={styles.listItemContainer}
-      onPress={this._onPressItem}
+      onPress={this._onPressItem(item)}
       foreground={Touchable.Ripple('#666666')}
     >
       <View>
@@ -45,9 +47,10 @@ export default class Home extends Component {
 }
 
 Home.propTypes = {
-  todoListData: PropTypes.array
+  todoListData: PropTypes.array,
+  onPressTodoItem: PropTypes.func
 };
 
 Home.defaultProps = {
-  //
+  onPressTodoItem: noop
 };
