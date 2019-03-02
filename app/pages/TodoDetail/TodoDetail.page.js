@@ -9,9 +9,12 @@ import {View} from 'react-native';
 import * as actions from '../../redux/actions/index.action';
 
 class TodoDetailPage extends Component {
+  findMatchedTodoTaskId = (taskId, todo) => todo.taskId === taskId
+
   _onPressMarkButton = () => {
-    const {navigation, updateTodoDispatcher} = this.props;
-    const todoItem = get(navigation, 'state.params.todoItem', null);
+    const {navigation, todoListData, updateTodoDispatcher} = this.props;
+    const taskId = get(navigation, 'state.params.todoItem.taskId', null);
+    const todoItem = todoListData.find(this.findMatchedTodoTaskId.bind(this, taskId));
     const newTodoItem = {
       ...todoItem,
       isDone: !todoItem.isDone
@@ -20,8 +23,9 @@ class TodoDetailPage extends Component {
   }
 
   render () {
-    const {navigation} = this.props;
-    const todoItem = get(navigation, 'state.params.todoItem', null);
+    const {navigation, todoListData} = this.props;
+    const taskId = get(navigation, 'state.params.todoItem.taskId', null);
+    const todoItem = todoListData.find(this.findMatchedTodoTaskId.bind(this, taskId));
     return (
       <View style={styles.container}>
         <TodoDetail style={styles.todoDetailContainer}
@@ -35,6 +39,7 @@ class TodoDetailPage extends Component {
 
 TodoDetailPage.propTypes = {
   navigation: PropTypes.object,
+  todoListData: PropTypes.array,
   updateTodoDispatcher: PropTypes.func
 };
 
@@ -43,8 +48,8 @@ TodoDetailPage.defaultProps = {
   updateTodoDispatcher: noop
 };
 
-const mapStateToProps = () => ({
-  //
+const mapStateToProps = (state) => ({
+  todoListData: get(state, 'todo.todoList', [])
 });
 
 const mapDispatchToProps = (dispatch) => ({
