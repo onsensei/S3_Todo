@@ -32,11 +32,40 @@ export function* updateTodoHandler (action) {
   }
 }
 
+export function* saveTodoHandler (action) {
+  const todoMode = get(action.payload, 'navigation.state.params.todoMode', null);
+  if (todoMode === 'add') {
+    //
+  } else if (todoMode === 'edit') {
+    const todoStoreState = yield select(todoSelector);
+    const editingTaskId = get(todoStoreState, 'editingTodo.taskId', null);
+    const foundTodo = todoStoreState.todoList.find((todo) => todo.taskId === editingTaskId);
+    if (foundTodo) {
+      const title = get(todoStoreState, 'editingTodo.title', null);
+      const description = get(todoStoreState, 'editingTodo.description', null);
+      const date = get(todoStoreState, 'editingTodo.date', null);
+      const newTodo = {
+        ...foundTodo,
+        title,
+        description,
+        date
+      };
+      yield put(actions.updateTodoAction(newTodo));
+    }
+  }
+
+  const navigation = get(action.payload, 'navigation', null);
+  if (navigation) {
+    navigation.dismiss();
+  }
+}
+
 // ----------
 
 function* todoSaga () {
   yield takeLatest(actions.INSERT_TODO, insertTodoHandler);
   yield takeLatest(actions.UPDATE_TODO, updateTodoHandler);
+  yield takeLatest(actions.SAVE_TODO, saveTodoHandler);
 }
 
 export default todoSaga;

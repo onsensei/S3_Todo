@@ -12,11 +12,10 @@ export const routeNames = {
 
 const getTodoNavOpt = ({navigation}) => {
   const onPressSaveTodoButton = () => {
-    // const payload = {
-    //   navigation,
-    //   paramX: XXX
-    // };
-    // navigation.dispatch(actions.Action(payload));
+    const payload = {
+      navigation
+    };
+    navigation.dispatch(actions.saveTodoAction(payload));
   };
 
   const saveTodoButton = ( // eslint-disable-next-line
