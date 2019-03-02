@@ -72,7 +72,6 @@ export default class Todo extends Component {
           />
 
           <Text style={styles.textHeader}>{'Date'}</Text>
-          <Text style={styles.textContent}>{date}</Text>
           <DatePicker style={styles.datePicker}
             date={date}
             mode='date'
