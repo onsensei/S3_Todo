@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import styles from './Todo.style';
-import {get} from 'lodash';
+import {get, noop} from 'lodash';
 import {ScrollView, Text, TextInput, View} from 'react-native';
 
 export default class Todo extends Component {
@@ -24,6 +24,11 @@ export default class Todo extends Component {
         todoItemData: newTodoItemData
       };
       this.setState(newState);
+
+      // ----------
+
+      const {onTodoDataChange} = this.props;
+      onTodoDataChange(newTodoItemData);
     }
   }
 
@@ -58,9 +63,11 @@ export default class Todo extends Component {
 }
 
 Todo.propTypes = {
-  todoItemData: PropTypes.object
+  todoItemData: PropTypes.object,
+  onTodoDataChange: PropTypes.func
 };
 
 Todo.defaultProps = {
-  todoItemData: null
+  todoItemData: null,
+  onTodoDataChange: noop
 };

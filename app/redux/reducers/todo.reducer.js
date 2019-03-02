@@ -24,7 +24,8 @@ const initialState = {
       date: '2019-03-15',
       isDone: false
     }
-  ]
+  ],
+  editingTodo: null
 };
 
 const todo = (prevState = initialState, action) => {
@@ -35,6 +36,15 @@ const todo = (prevState = initialState, action) => {
     const newState = {
       ...prevState,
       todoList: newTodoList
+    };
+    return newState;
+  }
+
+  case actions.POPULATE_EDITING_TODO: {
+    const newEditingTodo = get(action, 'payload', null);
+    const newState = {
+      ...prevState,
+      editingTodo: newEditingTodo
     };
     return newState;
   }
