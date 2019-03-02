@@ -1,4 +1,5 @@
 import replaceIndex from 'replace-array-index';
+import Toast from 'react-native-simple-toast';
 import uuidv1 from 'uuid/v1';
 import {get} from 'lodash';
 import {getSelector} from '../../utils/Common.util';
@@ -35,12 +36,18 @@ export function* updateTodoHandler (action) {
 
 export function* saveTodoHandler (action) {
   const todoMode = get(action.payload, 'navigation.state.params.todoMode', null);
-  if (todoMode === 'add') {
-    const todoStoreState = yield select(todoSelector);
-    const title = get(todoStoreState, 'editingTodo.title', null);
-    const description = get(todoStoreState, 'editingTodo.description', null);
-    const date = get(todoStoreState, 'editingTodo.date', null);
 
+  const todoStoreState = yield select(todoSelector);
+  const title = get(todoStoreState, 'editingTodo.title', null);
+  const description = get(todoStoreState, 'editingTodo.description', null);
+  const date = get(todoStoreState, 'editingTodo.date', null);
+
+  if (!title) {
+    Toast.show('Please enter title.');
+    return;
+  }
+
+  if (todoMode === 'add') {
     const newTodo = {
       taskId: uuidv1(),
       title,
@@ -50,13 +57,9 @@ export function* saveTodoHandler (action) {
     };
     yield put(actions.insertTodoAction(newTodo));
   } else if (todoMode === 'edit') {
-    const todoStoreState = yield select(todoSelector);
     const editingTaskId = get(todoStoreState, 'editingTodo.taskId', null);
     const foundTodo = todoStoreState.todoList.find((todo) => todo.taskId === editingTaskId);
     if (foundTodo) {
-      const title = get(todoStoreState, 'editingTodo.title', null);
-      const description = get(todoStoreState, 'editingTodo.description', null);
-      const date = get(todoStoreState, 'editingTodo.date', null);
       const newTodo = {
         ...foundTodo,
         title,
