@@ -6,8 +6,8 @@ import * as actions from '../../redux/actions/index.action';
 
 const todoSelector = getSelector('todo');
 
-export function* insertTodoHandler (payload) {
-  const newTodo = payload;
+export function* insertTodoHandler (action) {
+  const newTodo = action.payload;
   if (!newTodo) {
     return;
   }
@@ -17,8 +17,8 @@ export function* insertTodoHandler (payload) {
   yield put(actions.populateTodoListAction(newTodoList));
 }
 
-export function* updateTodoHandler (payload) {
-  const editedTodo = payload;
+export function* updateTodoHandler (action) {
+  const editedTodo = action.payload;
   const editedTaskId = get(editedTodo, 'taskId', null);
   if (!editedTaskId) {
     return;

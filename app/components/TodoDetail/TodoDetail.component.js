@@ -1,11 +1,20 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import styles from './TodoDetail.style';
+import {Button} from '../Shared/index';
+import {noop} from 'lodash';
 import {ScrollView, Text, View} from 'react-native';
 
 export default class TodoDetail extends Component {
+  _onPressMarkButton = () => {
+    const {onPressMarkButton} = this.props;
+    onPressMarkButton();
+  }
+
   render () {
     const {todoItemData} = this.props;
+    const statusText = todoItemData.isDone ? 'Done' : 'Pending';
+    const markText = todoItemData.isDone ? 'Mark as pending' : 'Mark as done';
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
@@ -22,7 +31,9 @@ export default class TodoDetail extends Component {
           <Text style={styles.textContent}>{todoItemData.date}</Text>
 
           <Text style={styles.textHeader}>{'Status'}</Text>
-          <Text style={styles.textContent}>{todoItemData.isDone ? 'Done' : 'Pending'}</Text>
+          <Text style={styles.textContent}>{statusText}</Text>
+
+          <Button text={markText} onPress={this._onPressMarkButton}/>
         </View>
       </ScrollView>
     );
@@ -30,9 +41,11 @@ export default class TodoDetail extends Component {
 }
 
 TodoDetail.propTypes = {
-  todoItemData: PropTypes.object
+  todoItemData: PropTypes.object,
+  onPressMarkButton: PropTypes.func
 };
 
 TodoDetail.defaultProps = {
-  todoItemData: null
+  todoItemData: null,
+  onPressMarkButton: noop
 };
