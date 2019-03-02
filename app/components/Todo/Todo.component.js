@@ -1,3 +1,4 @@
+import DatePicker from 'react-native-datepicker';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import styles from './Todo.style';
@@ -32,6 +33,22 @@ export default class Todo extends Component {
     }
   }
 
+  _onDateChange = (date) => {
+    const newTodoItemData = {
+      ...this.state.todoItemData,
+      date
+    };
+    const newState = {
+      todoItemData: newTodoItemData
+    };
+    this.setState(newState);
+
+    // ----------
+
+    const {onTodoDataChange} = this.props;
+    onTodoDataChange(newTodoItemData);
+  }
+
   render () {
     const {todoItemData} = this.state;
     const title = get(todoItemData, 'title', '');
@@ -56,6 +73,19 @@ export default class Todo extends Component {
 
           <Text style={styles.textHeader}>{'Date'}</Text>
           <Text style={styles.textContent}>{date}</Text>
+          <DatePicker style={styles.datePicker}
+            date={date}
+            mode='date'
+            placeholder='Select Date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            customStyles={{
+              dateIcon: styles.datePickerIcon,
+              dateInput: styles.datePickerInput
+            }}
+            onDateChange={this._onDateChange}
+          />
         </View>
       </ScrollView>
     );
