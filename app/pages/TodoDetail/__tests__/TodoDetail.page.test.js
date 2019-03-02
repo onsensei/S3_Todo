@@ -1,14 +1,14 @@
-import Home from '../Home.page';
+import TodoDetail from '../TodoDetail.page';
 
 // Note: test renderer must be required after react-native.
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-describe('Home', () => {
+describe('TodoDetail', () => {
   let component;
 
   beforeEach(() => {
-    component = <Home/>;
+    component = <TodoDetail/>;
   });
 
   it('renders correctly', () => {
