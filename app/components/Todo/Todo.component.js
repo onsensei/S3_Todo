@@ -58,17 +58,18 @@ export default class Todo extends Component {
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           <Text style={styles.textHeader}>{'Title'}</Text>
-          <TextInput style={styles.boxTextInput}
+          <TextInput style={styles.singleLineTextInput}
             onChangeText={this._onChangeText('title')}
             value={title}
             placeholder={'Title'}
           />
 
           <Text style={styles.textHeader}>{'Description'}</Text>
-          <TextInput style={styles.boxTextInput}
+          <TextInput style={styles.multiLineTextInput}
             onChangeText={this._onChangeText('description')}
             value={description}
             placeholder={'Description'}
+            multiline={true}
           />
 
           <Text style={styles.textHeader}>{'Date'}</Text>

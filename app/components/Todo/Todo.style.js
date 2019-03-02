@@ -1,3 +1,14 @@
+const boxTextInput = {
+  backgroundColor: '#ffffff',
+  color: '#000000',
+  fontSize: 18,
+  fontWeight: 'normal',
+  borderColor: '#888888',
+  borderWidth: 1,
+  padding: 8,
+  marginBottom: 10
+};
+
 export default {
   scrollContainer: {
     flex: 1
@@ -9,15 +20,12 @@ export default {
     fontSize: 24,
     fontWeight: 'bold'
   },
-  boxTextInput: {
-    backgroundColor: '#ffffff',
-    color: '#000000',
-    fontSize: 18,
-    fontWeight: 'normal',
-    borderColor: '#888888',
-    borderWidth: 1,
-    padding: 8,
-    marginBottom: 10
+  singleLineTextInput: {
+    ...boxTextInput
+  },
+  multiLineTextInput: {
+    ...boxTextInput,
+    height: 120
   },
   datePicker: {
     width: '100%'
