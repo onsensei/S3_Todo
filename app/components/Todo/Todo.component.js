@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import styles from './Todo.style';
 import {get, noop} from 'lodash';
-import {ScrollView, Text, TextInput, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Text, TextInput, View} from 'react-native';
 
 export default class Todo extends Component {
   constructor (props) {
@@ -55,7 +56,9 @@ export default class Todo extends Component {
     const description = get(todoItemData, 'description', '');
     const date = get(todoItemData, 'date', '');
     return (
-      <ScrollView style={styles.scrollContainer}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}
+        enableOnAndroid={true}
+      >
         <View style={styles.container}>
           <Text style={styles.textHeader}>{'Title'}</Text>
           <TextInput style={styles.singleLineTextInput}
@@ -87,7 +90,7 @@ export default class Todo extends Component {
             onDateChange={this._onDateChange}
           />
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
