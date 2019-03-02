@@ -20,7 +20,7 @@ const getTodoNavOpt = ({navigation}) => {
   };
 
   const saveTodoButton = ( // eslint-disable-next-line
-    <Button text={'save'} onPress={onPressSaveTodoButton}/>
+    <Button title={'save'} onPress={onPressSaveTodoButton}/>
   );
 
   return {

@@ -22,7 +22,7 @@ const getHomeNavOpt = ({navigation}) => {
   };
 
   const addTodoButton = ( // eslint-disable-next-line
-    <Button text={'add'} onPress={onPressAddTodoButton}/>
+    <Button title={'add'} onPress={onPressAddTodoButton}/>
   );
 
   return {
@@ -41,7 +41,7 @@ const getTodoDetailNavOpt = ({navigation}) => {
   };
 
   const editTodoButton = ( // eslint-disable-next-line
-    <Button text={'edit'} onPress={onPressEditTodoButton}/>
+    <Button title={'edit'} onPress={onPressEditTodoButton}/>
   );
 
   return {
