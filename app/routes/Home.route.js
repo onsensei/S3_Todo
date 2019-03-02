@@ -2,8 +2,8 @@ import Home from '../pages/Home/Home.page';
 import React from 'react';
 import TodoDetail from '../pages/TodoDetail/TodoDetail.page';
 import {Button} from 'react-native';
-import {createStackNavigator} from 'react-navigation';
-import * as actions from '../redux/actions/index.action';
+import {createStackNavigator, NavigationActions} from 'react-navigation';
+import {routeNames as rootRouteNames} from './index';
 
 export const routeNames = {
   Home: 'Home',
@@ -14,11 +14,11 @@ export const routeNames = {
 
 const getHomeNavOpt = ({navigation}) => {
   const onPressAddTodoButton = () => {
-    // const payload = {
-    //   navigation,
-    //   paramX: XXX
-    // };
-    // navigation.dispatch(actions.Action(payload));
+    const params = {
+      ...navigation.state.params,
+      todoMode: 'add'
+    };
+    navigation.dispatch(NavigationActions.navigate({routeName: rootRouteNames.Todo, params}));
   };
 
   const addTodoButton = ( // eslint-disable-next-line
@@ -33,11 +33,11 @@ const getHomeNavOpt = ({navigation}) => {
 
 const getTodoDetailNavOpt = ({navigation}) => {
   const onPressEditTodoButton = () => {
-    // const payload = {
-    //   navigation,
-    //   paramX: XXX
-    // };
-    // navigation.dispatch(actions.Action(payload));
+    const params = {
+      ...navigation.state.params,
+      todoMode: 'edit'
+    };
+    navigation.dispatch(NavigationActions.navigate({routeName: rootRouteNames.Todo, params}));
   };
 
   const editTodoButton = ( // eslint-disable-next-line
